@@ -53,6 +53,13 @@
             -webkit-user-select: none;
             -ms-user-select: none;
         }
+
+        .dragging {
+        opacity: .25;
+        }
+        .hover {
+        background-color: rgba(0,191,165,.04);
+        }
     </style>
 </head>
 <body>
@@ -71,11 +78,19 @@
         // Allow multiple draggable items
         let dragSources = document.querySelectorAll('[draggable="true"]')
         dragSources.forEach(dragSource => {
-        dragSource.addEventListener('dragstart', dragStart)
+            dragSource.addEventListener('dragstart', dragStart)
+            dragSource.addEventListener('dragend', dragEnd)
+
         })
 
         function dragStart (e) {
-        e.dataTransfer.setData('text/plain', e.target.id)
+            console.log("a");
+            this.classList.add('dragging')
+            e.dataTransfer.setData('text/plain', e.target.id)
+        }
+        function dragEnd (e) {
+            console.log("b");
+            this.classList.remove('dragging')
         }
 
         // Allow multiple dropped targets
@@ -87,15 +102,21 @@
         })
 
         function dropped (e) {
-        cancelDefault(e)
-        let id = e.dataTransfer.getData('text/plain')
-        e.target.appendChild(document.querySelector('#' + id))
+            let id = e.dataTransfer.getData('text/plain')
+            e.target.appendChild(document.querySelector('#' + id))
+            this.classList.remove('hover')
+        }
+        function dragOver (e) {
+            this.classList.add('hover')
         }
 
+        function dragLeave (e) {
+            this.classList.remove('hover')
+        }
         function cancelDefault (e) {
-        e.preventDefault()
-        e.stopPropagation()
-        return false
+            e.preventDefault()
+            e.stopPropagation()
+            return false
         }
     </script>
 </body>
