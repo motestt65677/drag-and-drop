@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .square{
+            width:5em;
+            height:5em;
+            size:20px;
+            border: 1px solid red;
+        }
+        .dot {
+            height: 5em;
+            width: 5em;
+            background-color: red;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        #source-container {
+            height: 400px;
+            border: 2px solid #CCC;
+            flex: 1;
+            margin: 1rem;
+        }
+        #target-container {
+            height: 400px;
+            border: 2px solid #CCC;
+            flex: 1;
+            margin: 1rem;
+        }
+        #drag-drop-container{
+            display:flex;
+        }
+        [draggable="true"] {
+            /*
+            To prevent user selecting inside the drag source
+            */
+            user-select: none;
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Drag and Drop</h1>
+
+    <div id="drag-drop-container">
+        <div id="source-container" class="square">
+            <span class="dot" draggable="true"></span>
+        </div>
+        <div id="target-container" class="square"></div>
+    </div>
+</body>
+</html>
